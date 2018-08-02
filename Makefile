@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpatter <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: tpatter <tpatter@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/24 17:28:22 by tpatter           #+#    #+#              #
-#    Updated: 2018/07/29 11:09:14 by tpatter          ###   ########.fr        #
+#    Updated: 2018/08/02 15:34:32 by tpatter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	lem-in
 SRCDIR		=	srcs/
 SRC			=	lem_in.c\
 				ft_readmap.c\
-				ft_checkerror.c
+				buildft.c
 OBJDIR		=	obj/
 OBJ			=	$(SRC:%.c=%.o)
 OBJPATH		:=	$(addprefix $(OBJDIR), $(OBJ))
