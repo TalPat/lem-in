@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpatter <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tpatter <tpatter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 16:18:15 by tpatter           #+#    #+#             */
-/*   Updated: 2018/07/27 17:31:03 by tpatter          ###   ########.fr       */
+/*   Updated: 2018/08/03 13:00:39 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	ft_readmap(t_lem *lem)
 	{
 		ft_lstaddend(lem->map, lem->line, ft_strlen(lem->line) + 1);
 	}
+	ft_assignmap(lem);
 }

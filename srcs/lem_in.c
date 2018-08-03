@@ -6,7 +6,7 @@
 /*   By: tpatter <tpatter@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 16:07:06 by tpatter           #+#    #+#             */
-/*   Updated: 2018/08/02 16:02:15 by tpatter          ###   ########.fr       */
+/*   Updated: 2018/08/03 13:02:03 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int	main(void)
 {
 	t_lem	*lem;
+	int		i;
 
 	lem = (t_lem*)malloc(sizeof(t_lem));
 	ft_readmap(lem);
@@ -26,6 +27,8 @@ int	main(void)
 		ft_putendl(lem->map->content);
 		lem->map = lem->map->next;
 	}
-	while (1);
+	i = 0;
+	while (lem->charmap[i])
+		ft_putendl(lem->charmap[i++]);
 	return (0);
 }
