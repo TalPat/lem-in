@@ -6,7 +6,7 @@
 #    By: tpatter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/24 17:28:22 by tpatter           #+#    #+#              #
-#    Updated: 2018/08/08 13:37:12 by tpatter          ###   ########.fr        #
+#    Updated: 2018/08/08 15:15:13 by tpatter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC			=	lem_in.c\
 				ft_buildrooms.c\
 				ft_validlink.c\
 				ft_buildlinks.c\
-				ft_isroom.c
+				ft_isroom.c\
+				ft_findpath.c
 OBJDIR		=	obj/
 OBJ			=	$(SRC:%.c=%.o)
 OBJPATH		:=	$(addprefix $(OBJDIR), $(OBJ))
