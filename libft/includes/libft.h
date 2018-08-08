@@ -6,7 +6,7 @@
 /*   By: tpatter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:37:48 by tpatter           #+#    #+#             */
-/*   Updated: 2018/07/24 11:58:40 by tpatter          ###   ########.fr       */
+/*   Updated: 2018/08/08 10:47:18 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int					get_next_line(int fd, char **line);
 int					ft_grabline(int fd, char **line);
 size_t				ft_lstlen(t_list *lst);
 int					ft_lststrduplicates(t_list *lst);
+int					ft_isnum(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: tpatter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/24 17:28:22 by tpatter           #+#    #+#              #
-#    Updated: 2018/07/29 09:58:45 by tpatter          ###   ########.fr        #
+#    Updated: 2018/08/08 10:46:38 by tpatter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC			=	ft_memset.c\
 				ft_isalpha.c\
 				ft_isdigit.c\
 				ft_isalnum.c\
+				ft_isnum.c\
 				ft_isascii.c\
 				ft_isprint.c\
 				ft_toupper.c\

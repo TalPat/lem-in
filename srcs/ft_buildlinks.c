@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assstart.c                                      :+:      :+:    :+:   */
+/*   ft_buildlinks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpatter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 13:04:08 by tpatter           #+#    #+#             */
-/*   Updated: 2018/08/08 14:16:15 by tpatter          ###   ########.fr       */
+/*   Created: 2018/08/08 12:18:44 by tpatter           #+#    #+#             */
+/*   Updated: 2018/08/08 14:09:03 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,45 @@
 #include "lem_in.h"
 #include <stdlib.h>
 
-int		ft_numstarts(t_list *map)
+int		ft_linkno(t_lem *lem)
 {
-	int		count;
 	t_list	*tmp;
+	int		count;
 
 	count = 0;
-	tmp = map;
+	tmp = lem->map;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->content, "##start"))
+		if (ft_validlink(tmp->content, lem))
 			count++;
+		else
+			break ;
 		tmp = tmp->next;
 	}
 	return (count);
 }
 
-void	ft_assandrem(t_lem *lem)
+void	ft_buildlinks(t_lem *lem)
 {
+	int		linkno;
+	int		i;
 	t_list	*tmp;
-	t_list	*prev;
 
 	tmp = lem->map;
+	i = 0;
+	linkno = ft_linkno(lem);
+	lem->links = (char**)malloc(sizeof(char*) * (linkno + 1));
+	lem->links[linkno] = NULL;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->content, "##start"))
+		if (ft_validlink(tmp->content, lem))
 		{
-			ft_lstremove(tmp, prev, lem);
-			tmp = tmp->next;
-			if (ft_validroom(tmp->content))
-				lem->start = ft_strdup(tmp->content);
-			else
-			{
-				lem->start = NULL;
-				lem->err = 1;
-			}
+			lem->links[i] = ft_strdup(tmp->content);
+			ft_lstremove(tmp, NULL, lem);
 		}
-		prev = tmp;
+		else
+			break ;
 		tmp = tmp->next;
-	}
-}
-
-void	ft_assstart(t_lem *lem)
-{
-	int		numstarts;
-
-	numstarts = ft_numstarts(lem->map);
-	if (numstarts != 1)
-	{
-		lem->err = 1;
-		lem->start = NULL;
-	}
-	else
-	{
-		ft_assandrem(lem);
+		i++;
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assstart.c                                      :+:      :+:    :+:   */
+/*   ft_assend.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpatter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 13:04:08 by tpatter           #+#    #+#             */
-/*   Updated: 2018/08/08 14:16:15 by tpatter          ###   ########.fr       */
+/*   Created: 2018/08/08 10:30:10 by tpatter           #+#    #+#             */
+/*   Updated: 2018/08/08 14:14:27 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lem_in.h"
 #include <stdlib.h>
 
-int		ft_numstarts(t_list *map)
+int		ft_numends(t_list *map)
 {
 	int		count;
 	t_list	*tmp;
@@ -23,14 +23,14 @@ int		ft_numstarts(t_list *map)
 	tmp = map;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->content, "##start"))
+		if (!ft_strcmp(tmp->content, "##end"))
 			count++;
 		tmp = tmp->next;
 	}
 	return (count);
 }
 
-void	ft_assandrem(t_lem *lem)
+void	ft_assandremend(t_lem *lem)
 {
 	t_list	*tmp;
 	t_list	*prev;
@@ -38,15 +38,15 @@ void	ft_assandrem(t_lem *lem)
 	tmp = lem->map;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->content, "##start"))
+		if (!ft_strcmp(tmp->content, "##end"))
 		{
 			ft_lstremove(tmp, prev, lem);
 			tmp = tmp->next;
 			if (ft_validroom(tmp->content))
-				lem->start = ft_strdup(tmp->content);
+				lem->end = ft_strdup(tmp->content);
 			else
 			{
-				lem->start = NULL;
+				lem->end = NULL;
 				lem->err = 1;
 			}
 		}
@@ -55,18 +55,18 @@ void	ft_assandrem(t_lem *lem)
 	}
 }
 
-void	ft_assstart(t_lem *lem)
+void	ft_assend(t_lem *lem)
 {
-	int		numstarts;
+	int		numends;
 
-	numstarts = ft_numstarts(lem->map);
-	if (numstarts != 1)
+	numends = ft_numends(lem->map);
+	if (numends != 1)
 	{
 		lem->err = 1;
-		lem->start = NULL;
+		lem->end = NULL;
 	}
 	else
 	{
-		ft_assandrem(lem);
+		ft_assandremend(lem);
 	}
 }
