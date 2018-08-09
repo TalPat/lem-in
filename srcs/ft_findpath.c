@@ -6,12 +6,12 @@
 /*   By: tpatter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 15:08:03 by tpatter           #+#    #+#             */
-/*   Updated: 2018/08/08 16:43:46 by tpatter          ###   ########.fr       */
+/*   Updated: 2018/08/09 14:32:46 by tpatter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "lem-in.h"
+#include "lem_in.h"
 #include <stdlib.h>
 
 void	ft_instpath(t_lem *lem)
@@ -29,44 +29,74 @@ void	ft_instpath(t_lem *lem)
 		lem->visited[i] = NULL;
 		i++;
 	}
-	lem->path[0] = ft_strdup(lem->start);
+	lem->startname = ft_strsplit(lem->start, ' ')[0];
+	lem->endname = ft_strsplit(lem->end, ' ')[0];
+	lem->path[0] = lem->startname;
+	lem->curroom = lem->startname;
+	lem->found = 0;
 }
 
-void	ft_getlinks(t_lem *lem, char *cur)
+int		ft_visited(t_lem *lem, char *r1, char *r2)
 {
-	int		i;
-	int		j;
-	char	**split;
+	int	i;
+	int	count1;
+	int	count2;
 
 	i = 0;
-	j = 0;
-	while (lem->links[i])
+	count1 = 0;
+	count2 = 0;
+	while (lem->visited[i])
 	{
-		split = ft_strsplit(lem->links[i]);
-		if (!ft_strcmp(cur, split[0]) || !ft_strcmp(cur, split[1]))
-		{
-			if (!ft_strcmp(cur, split[0]))
-				lem->curlinks[j] = split[0];
-			if (!ft_strcmp(cur, split[1]))
-				lem->curlinks[j] = split[1];
-			j++;
-		}
+		if (!ft_strcmp(r1, lem->visited[i]))
+			count1 = 1;
+		if (!ft_strcmp(r2, lem->visited[i]))
+			count2 = 1;
 		i++;
 	}
+	if (count1 + count2 == 2)
+		return (1);
+	return (0);
+}
+
+int		ft_goback(t_lem *lem, int index)
+{
+	int	i;
+
+	i = 0;
+	while (lem->path[i])
+		i++;
+	if (i)
+		lem->path[i - 1] = NULL;
+	if (i > 1)
+		lem->curroom = lem->path[i - 2];
+	return (index - 1);
 }
 
 void	ft_findpath(t_lem *lem)
 {
-	char	*cur;
 	int		i;
-	int		found;
 
 	i = 0;
 	ft_instpath(lem);
-	cur = lem->path[i];
-	found = 0;
-	while (!found)
+	while (!lem->found)
 	{
-		ft_getlinks(lem, cur);
+		if (!ft_visited(lem, lem->curroom, lem->curroom))
+			ft_stradd(lem->curroom, lem->visited);
+		ft_getlinks(lem, lem->curroom);
+		if (lem->curlinks[0])
+		{
+			lem->curroom = lem->curlinks[0];
+			i++;
+			lem->path[i] = lem->curroom;
+			if (!ft_strcmp(lem->curroom, lem->endname))
+				lem->found = 1;
+		}
+		else
+			i = ft_goback(lem, i);
+		if (!lem->path[0])
+		{
+			ft_putendl("NO SOLUTION");
+			break ;
+		}
 	}
 }

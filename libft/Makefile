@@ -6,7 +6,7 @@
 #    By: tpatter <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/24 17:28:22 by tpatter           #+#    #+#              #
-#    Updated: 2018/08/08 10:46:38 by tpatter          ###   ########.fr        #
+#    Updated: 2018/08/09 11:37:59 by tpatter          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ SRC			=	ft_memset.c\
 				get_next_line.c\
 				ft_grabline.c\
 				ft_lstlen.c\
-				ft_lststrduplicates.c
+				ft_lststrduplicates.c\
+				ft_stradd.c
 OBJDIR		=	obj/
 OBJ			=	$(SRC:%.c=%.o)
 OBJPATH		:=	$(addprefix $(OBJDIR), $(OBJ))
